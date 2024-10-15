@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Blog>
+@{
+    ViewData["Title"] = "Blog";
+}
+
+
+<div class="hero-wrap hero-bread" style="background-image: url('images/bg4.jpg');">
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Trang chủ</a></span> <span>/ Blog</span></p>
+                <h1 class="mb-0 bread">Blog</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="ftco-section ftco-degree-bg">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-12 d-flex ftco-animate">
+                    <div class="blog-entry align-self-stretch d-md-flex">
+                        <a class="block-20" style="background-image: url('/images/@item.Image');">
+                        </a>
+                        <div class="text d-block pl-md-4">
+                            <div class="meta mb-3">
+                                <div><a href="#">June 10, 2023</a></div>
+                                <div><a href="#">Admin</a></div>
+                                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 1</a></div>
+                            </div>
+                            <h3 class="heading"><a href="#">@item.Name</a></h3>
+                            <p>@item.Description</p>
+                            <p><a asp-action="Detail" asp-route-id="@item.Id" class="btn btn-primary py-2 px-3">Đọc thêm</a></p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+@if (ViewBag.TotalPages > 1)
+{
+    <div class="d-flex w-100 justify-content-center">
+        <pagination page-count="@ViewBag.TotalPages"
+                page-number="@ViewBag.PageNumber"
+                page-range="@ViewBag.PageRange">
+        </pagination>
+
+    </div>
+}

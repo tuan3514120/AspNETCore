@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Product>
+
+@{
+    ViewData["Title"] = "Bộ sưu tập";
+}
+
+<div class="hero-wrap hero-bread" style="background-image: url('images/bg1.jpg');">
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span class="mr-2"><a>Trang chủ</a></span> <span>/ Bộ sưu tập</span></p>
+                <h1 class="mb-0 bread">Bộ sưu tập</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10 mb-5 text-center">
+                <ul class="product-category">
+                    <vc:categories></vc:categories>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="product">
+                        <a class="img-prod" asp-action="Detail" asp-route-id="@item.Id">
+                            <img class="img-fluid" src="/images/@item.Image">
+                            <div class="overlay"></div>
+                        </a>
+                        <div class="text py-3 pb-4 px-3 text-center">
+                            <h3><a href="#">@item.Name</a></h3>
+                            <div class="d-flex">
+                                <div class="pricing">
+                                    <p class="price"><span>@item.Price Tr VNĐ</span></p>
+                                </div>
+                            </div>
+                            <div class="bottom-area d-flex px-3">
+                                <div class="m-auto d-flex">
+                                    <a class="buy-now d-flex justify-content-center align-items-center mx-1" asp-controller="Cart" asp-action="Add" asp-route-id="@item.Id">
+                                        <span><i class="ion-ios-cart"></i></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        @if (ViewBag.TotalPages > 1)
+        {
+            <div class="d-flex w-100 justify-content-center">
+                            <pagination page-count="@ViewBag.TotalPages"
+                                    page-target="/products/@ViewBag.CategorySlug"
+                                    page-number="@ViewBag.PageNumber"
+                                    page-range="@ViewBag.PageRange">
+                            </pagination>
+                    
+            </div>
+        }
+
+    </div>
+</section>
+
+

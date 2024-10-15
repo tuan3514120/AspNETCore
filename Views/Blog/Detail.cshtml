@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Blog>
+@{
+    ViewData["Title"] = "Chi tiết bài viết";
+}
+
+
+<div class="hero-wrap hero-bread" style="background-image: url('/images/bg4.jpg');">
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span class="mr-2"><a>Trang chủ</a></span> <span>Blog</span></p>
+                <h1 class="mb-0 bread">Blog</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="ftco-section ftco-degree-bg">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-8 ftco-animate">
+                    <h2 class="mb-3">@item.Name</h2>
+                    <p>@item.Description.</p>
+                    <p>
+                        <img src="/images/@item.Image" alt="" class="img-fluid">
+                    </p>
+                    <div class="tagcloud">
+                        <a href="#" class="tag-cloud-link">Blog</a>
+                        <a href="#" class="tag-cloud-link">Tips</a>
+                        <a href="#" class="tag-cloud-link">Trick</a>
+                        <a href="#" class="tag-cloud-link">Wedding</a>
+                    </div>
+                </div>
+
+                <div class="about-author d-flex p-4 bg-light">
+                    <div class="bio align-self-md-center mr-4">
+                        <img src="~/images/10.jpg" alt="Image placeholder" class="img-fluid mb-4">
+                    </div>
+                    <div class="desc align-self-md-center">
+                        <h3>Tuấn Nguyễn Văn</h3>
+                        <p>Nói đến ngành ảnh viện áo cưới Hà Nội, TNV's Wedding được đánh giá là Studio chụp ảnh cưới chuyên nghiệp và đẳng cấp nhất. Với đội ngũ nhân viên tư vấn nhiệt tình, thân thiện cùng ê-kíp photographer, makeup, photoshop chuyên nghiệp đã và đang mang đến những bộ ảnh cưới đẹp, hoành tráng và đa dạng phong cách cho các cặp đôi khi lựa chọn đến với TNV 's Wedding.</p>
+                    </div>
+                </div>
+
+                <div class="pt-5 mt-5">
+                    <h3 class="mb-5">1 Bình luận</h3>
+                    <ul class="comment-list">
+                        <li class="comment">
+                            <div class="vcard bio">
+                                <img src="~/images/11.png" alt="Image placeholder">
+                            </div>
+                            <div class="comment-body">
+                                <h3>Phạm Vĩnh Thái</h3>
+                                <div class="meta">June 5, 2023 at 2:21pm</div>
+                                <p>TNV's Wedding là một nơi rất tuyệt vời, dịch vụ ở đây rất tốt và những mẫu váy cưới được thiết kế rất tỉ mỉ, nhân viên tại đây cực kì tận tâm, tôi và chồng mình thật hạnh phúc khi đã đặt hàng tại đây.</p>
+                                <p><a href="#" class="reply">Trả lời</a></p>
+                            </div>
+                        </li>
+                    <div class="comment-form-wrap pt-5">
+                        <h3 class="mb-5">Để lại bình luận</h3>
+                        <form action="#" class="p-5 bg-light">
+                            <div class="form-group">
+                                <label for="name">Tên *</label>
+                                <input type="text" class="form-control" id="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" class="form-control" id="email">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Bình luận</label>
+                                <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Gửi" class="btn py-3 px-4 btn-primary">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

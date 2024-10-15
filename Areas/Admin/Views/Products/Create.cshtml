@@ -1,0 +1,76 @@
+﻿@model Shopping.Models.Product
+@{
+    ViewData["Title"] = "Tạo";
+}
+
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+            <h1 class="mt-4">Thêm sản phẩm</h1>
+            <ol class="breadcrumb mb-4">
+                <a asp-action="Index">Trang chủ </a>
+                <li class="breadcrumb-item active">/ Thêm sản phẩm</li>
+            </ol>
+            <div class="card mb-4">
+                <div class="row">
+                    <div class="col-md-4">
+                        <form asp-action="Create" enctype="multipart/form-data">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <div class="form-group">
+                                <label>Tên sản phẩm</label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Miêu tả</label>
+                                <textarea asp-for="Description" class="form-control"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Giá (Tr.VNĐ)</label>
+
+                                <input asp-for="Price" class="form-control" />
+                                <span asp-validation-for="Price" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Danh mục</label>
+                                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories">
+                                    <option value="0">Choose a category</option>
+                                </select>
+                                <span asp-validation-for="CategoryId" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Ảnh</label>
+
+                                <input asp-for="ImageUpload" class="form-control" />
+                                <img id="imgpreview" class="pt-2" />
+                                <span asp-validation-for="ImageUpload" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <button class="btn btn-primary">Thêm</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="https://cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
+    <script>
+            $("#ImageUpload").change(function() {
+                    readURL(this);
+            });
+            CKEDITOR.replace( 'Description' );
+    </script>
+}

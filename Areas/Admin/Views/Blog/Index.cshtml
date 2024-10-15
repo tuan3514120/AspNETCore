@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Blog>
+
+@{
+    ViewData["Title"] = "Quản lý";
+}
+
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+            <h1 class="mt-4">Quản lý bài viết</h1>
+            <ol class="breadcrumb mb-4">
+                <a asp-action="Index">Trang chủ</a>
+                <li class="breadcrumb-item active">/ Quản lý bài viết</li>
+            </ol>
+            @TempData["Name"]
+            <br /><br />
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i>
+                </div>
+                <div class="card-body">
+                    <table id="datatablesSimple">
+                        <thead>
+                            <tr>
+                                <th>Tên bài viết</th>
+                                <th>Nội dung</th>
+                                <th>Ảnh</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Name</td>
+                                    <td>@item.Description</td>
+                                    <td><img src="/images/@item.Image" width="100" alt="" /></td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.Id">Cập nhật</a> |
+                                        <a asp-action="Delete" asp-route-id="@item.Id" class="confirmDeletion">Xóa</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    @if (ViewBag.TotalPages > 1)
+                    {
+                        <div class="d-flex w-100 justify-content-center">
+                            <pagination page-count="@ViewBag.TotalPages"
+                                    page-target="/admin/products/@ViewBag.CategorySlug"
+                                    page-number="@ViewBag.PageNumber"
+                                    page-range="@ViewBag.PageRange">
+                            </pagination>
+
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="py-4 bg-light mt-auto">
+        <div class="container-fluid px-4">
+            <div class="d-flex align-items-center justify-content-between small">
+                <div class="text-muted">Copyright &copy; TNV's Wedding 2023</div>
+                <div>
+                    <a href="#">Chính sách bảo mật</a>
+                    &middot;
+                    <a href="#">Điều khoản &amp; Điều kiện</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+

@@ -1,0 +1,158 @@
+﻿@model CartViewModel
+
+@{
+    ViewData["Title"] = "Giỏ hàng";
+}
+<div class="hero-wrap hero-bread" style="background-image: url('images/bg5.jpg');">
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span class="mr-2"><a>Trang chủ</a></span> <span>/ Giỏ hàng</span></p>
+                <h1 class="mb-0 bread">Giỏ hàng</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (Model.CartItems.Count > 0)
+{
+    <section class="ftco-section ftco-cart">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 ftco-animate">
+                    <div class="cart-list">
+                        <table class="table">
+                            <thead class="thead-primary">
+                                <tr class="text-center">
+                                    <th>&nbsp;</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Giá</th>
+                                    <th>Số lượng</th>
+                                    <th>Chỉnh sửa</th>
+                                    <th>Tổng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.CartItems)
+                                {
+                                    <tr class="text-center">
+                                        <td class="image-prod"><div class="img" style="background-image:url(images/@item.Image)" width="100" alt=""></div></td>
+
+                                        <td class="product-name">
+                                            <h3>@item.ProductName</h3>
+                                        </td>
+                                        <td class="price">@item.Price Tr.VNĐ</td>
+                                        <td>@item.Quantity</td>
+                                        <td class="quantity">
+                                            <a class="btn btn-primary btn-sm" asp-action="Add" asp-route-id="@item.ProductId">+</a>
+                                            <a class="btn btn-primary btn-sm" asp-action="Decrease" asp-route-id="@item.ProductId">-</a>
+                                            <a class="btn btn-primary btn-sm" asp-action="Remove" asp-route-id="@item.ProductId">Xóa</a>
+                                        </td>
+                                        <td class="total">@Model.CartItems.Where(x=>x.ProductId == item.ProductId).Sum(x=> x.Quantity*x.Price) Tr.VNĐ</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-end">
+                <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+                    <div class="cart-total mb-3">
+                        <h3>Mã giảm giá</h3>
+                        <p>Vui lòng nhập mã giảm giá (Nếu có)/p>
+                        <form action="#" class="info">
+                            <div class="form-group">
+                                <label for="">Coupon code</label>
+                                <input type="text" class="form-control text-left px-3" placeholder="">
+                            </div>
+                        </form>
+                    </div>
+                    <p><a href="checkout.html" class="btn btn-primary py-3 px-4">Áp dụng mã giảm giá</a></p>
+                </div>
+                <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+                    <div class="cart-total mb-3">
+                        <h3>Thông tin nhận hàng</h3>
+                        <p>Vui lòng điền thông tin giao hàng</p>
+                        <form asp-action="Checkout" method="post" class="info">
+                            <div class="form-group">
+                                <label for="">Họ và tên</label>
+                                <input type="text" asp-for="CheckoutModel.Name" class="form-control text-left px-3" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="country">Email</label>
+                                <input type="text"asp-for="CheckoutModel.Email" class="form-control text-left px-3" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="country">Số điện thoại</label>
+                                <input type="text" asp-for="CheckoutModel.PhoneNumber" class="form-control text-left px-3" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="country">Địa chỉ</label>
+                                <input type="text" asp-for="CheckoutModel.Address" class="form-control text-left px-3" placeholder="">
+                            </div>
+                            <div class="control-group">
+                                <div class="control">
+                                    <button type="submit" class="btn">Đặt hàng</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <p><a href="checkout.html" class="btn btn-primary py-3 px-4">Hoàn thành</a></p>
+                </div>
+                <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+
+                    <div class="cart-total mb-3">
+                        <h3>Tóm tắt đơn hàng</h3>
+                        <p class="d-flex">
+                            <span>Tổng phụ</span>
+                            <span>@Model.GrandTotal Tr.VNĐ</span>
+                        </p>
+                        <p class="d-flex">
+                            <span>Phí vận chuyển</span>
+                            <span>0.00</span>
+                        </p>
+                        <p class="d-flex">
+                            <span>Mã giảm giá</span>
+                            <span>0.00</span>
+                        </p>
+                        <hr>
+                        <p class="d-flex total-price">
+                            <span>Tổng</span>
+                            <span>@Model.GrandTotal Tr.VNĐ</span>
+                        </p>
+                    </div>
+                    <p><a asp-controller="Cart" asp-action="Checkout" class="btn btn-primary py-3 px-4">Thanh toán</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+else
+{
+    <section class="ftco-section ftco-cart">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 ftco-animate">
+                    <div class="cart-list">
+                        <table class="table">
+                            <thead class="thead-primary">
+                                <tr class="text-center">
+                                    <th>&nbsp;</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Giá</th>
+                                    <th>Số lượng</th>
+                                    <th>Tổng</th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <p class="text-center">"Hông" có gì trong giỏ hết</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+    </section>
+}

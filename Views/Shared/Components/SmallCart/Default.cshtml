@@ -1,0 +1,13 @@
+﻿@model SmallCartViewModel
+
+
+@if(Model!= null)
+{
+    <li class="nav-item cta cta-colored"><a class="nav-link" asp-controller="cart" asp-action="Index"><span class="icon-shopping_cart"></span>Giỏ hàng[@Model.NumberOfItems]</a></li>
+
+}
+else
+{
+    <li class="nav-item cta cta-colored"><a class="nav-link" asp-controller="cart"><span class=" icon-shopping_cart"></span>Giỏ hàng[0]</a></li>
+
+}

@@ -1,0 +1,193 @@
+﻿@model IEnumerable<Product>
+
+@{
+    ViewData["Title"] = "Trang chủ";
+}
+
+<section id="home-section" class="hero">
+    <div class="home-slider owl-carousel">
+        <div class="slider-item" style="background-image: url(images/bg2.jpg);">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+
+                    <div class="col-md-12 ftco-animate text-center">
+                        <h1 class="mb-2">Chọn cho mình phong cách váy cưới nổi bật</h1>
+                        <h2 class="subheading mb-4">Những mẫu váy cưới mang phong cách nhẹ nhàng, toát lên vẻ đẹp thanh lịch và sang trọng</h2>
+                        <p><a href="#" class="btn btn-primary">Chi tiết</a></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="slider-item" style="background-image: url(images/bgg.jpg);">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+
+                    <div class="col-sm-12 ftco-animate text-center">
+                        <h1 class="mb-2">Mỗi cô dâu là một nàng thơ của TNV!</h1>
+                        <h2 class="subheading mb-4">Tất cả những gì bạn cần cho ngày trọng đại của đời mình, TNV sẽ cùng bạn chuẩn bị và chăm chút từ những chi tiết nhỏ nhất.</h2>
+                        <p><a href="#" class="btn btn-primary">Chi tiết</a></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br />
+<br />
+<br />
+
+<section class="ftco-section ftco-category ftco-no-pt">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-6 order-md-last align-items-stretch d-flex">
+                        <div class="category-wrap-2 ftco-animate img align-self-stretch d-flex" style="background-image: url(images/2.jpg);">
+                            <div class="text text-center">
+                                <h2>TNV's Wedding</h2>
+                                <p>Hóa thân thành nàng thơ ngay hôm nay</p>
+                                <p><a href="#" class="btn btn-primary">Mua ngay</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url(images/3.jpg);">
+                            <div class="text px-3 py-1">
+                                <h2 class="mb-0"><a href="#">Váy cưới chữ A</a></h2>
+                            </div>
+                        </div>
+                        <div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url(images/4.jpg);">
+                            <div class="text px-3 py-1">
+                                <h2 class="mb-0"><a href="#">Váy cưới hiện đại</a></h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url(images/5.png);">
+                    <div class="text px-3 py-1">
+                        <h2 class="mb-0"><a href="#">Váy cưới cổ điển</a></h2>
+                    </div>
+                </div>
+                <div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url(images/6.jpg);">
+                    <div class="text px-3 py-1">
+                        <h2 class="mb-0"><a href="#">Váy cưới đuôi cá</a></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center mb-3 pb-3">
+            <div class="col-md-12 heading-section text-center ftco-animate">
+                <span class="subheading">Sản phẩm mới nhất</span>
+                <h2 class="mb-4">Sản phẩm của chúng tôi</h2>
+                <p>
+                    Các thiết kế Váy, Áo cưới Luxury cao cấp và sang trọng được những thợ may lành nghề tỉ mẩn may đo, đắp xếp với độ tinh xảo, chi tiết đính kết cầu kỳ trên váy cưới cùng thời gian gia công kéo dài, cho ước mộng hóa nàng công chúa diễm kiều của nàng thành hiện thực.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="product">
+                        <a asp-action="Detail" asp-route-id="@item.Id" class="img-prod">
+                            <img class="img-fluid" src="/images/@item.Image">
+                            <div class="overlay"></div>
+                        </a>
+                        <div class="text py-3 pb-4 px-3 text-center">
+                            <h3><a href="#">@item.Name</a></h3>
+                            <div class="d-flex">
+                                <div class="pricing">
+                                    <p class="price"><span>@item.Price Tr.VNĐ</span></p>
+                                </div>
+                            </div>
+                            <div class="bottom-area d-flex px-3">
+                                <div class="m-auto d-flex">
+                                    <a asp-controller="Cart" asp-action="Add" asp-route-id="@item.Id" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                        <span><i class="ion-ios-cart"></i></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+
+
+<section class="ftco-section testimony-section">
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-3">
+            <div class="col-md-7 heading-section ftco-animate text-center">
+                <span class="subheading">Nhận xét</span>
+                <h2 class="mb-4">Đánh giá từ khách hàng</h2>
+            </div>
+        </div>
+        <div class="row ftco-animate">
+            <div class="col-md-12">
+                <div class="carousel-testimony owl-carousel">
+                    <div class="item">
+                        <div class="testimony-wrap p-4 pb-5">
+                            <div class="user-img mb-5" style="background-image: url(images/cap1.jpg)">
+                                <span class="quote d-flex align-items-center justify-content-center">
+                                    <i class="icon-quote-left"></i>
+                                </span>
+                            </div>
+                            <div class="text text-center">
+                                <p class="mb-5 pl-4 line">TNV's Wedding là một nơi rất tuyệt vời, dịch vụ ở đây rất tốt và những mẫu váy cưới được thiết kế rất tỉ mỉ, nhân viên tại đây cực kì tận tâm, tôi và chồng mình thật hạnh phúc khi đã đặt hàng tại đây.</p>
+                                <p class="name">Cặp đôi: Nhung & Trực</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="testimony-wrap p-4 pb-5">
+                            <div class="user-img mb-5" style="background-image: url(images/cap2.jpg)">
+                                <span class="quote d-flex align-items-center justify-content-center">
+                                    <i class="icon-quote-left"></i>
+                                </span>
+                            </div>
+                            <div class="text text-center">
+                                <p class="mb-5 pl-4 line">Sau khi sử dụng dịch vụ tại TNV's Wedding, vợ chồng tôi rất hài lòng với những mẫu váy cưới tại đây, cảm ơn TNV's Wedding đã giúp chúng tôi có một ngày trọng đại thật hạnh phúc.</p>
+                                <p class="name">Cặp đôi: Hùng & Duyên</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="testimony-wrap p-4 pb-5">
+                            <div class="user-img mb-5" style="background-image: url(images/cap3.jpg)">
+                                <span class="quote d-flex align-items-center justify-content-center">
+                                    <i class="icon-quote-left"></i>
+                                </span>
+                            </div>
+                            <div class="text text-center">
+                                <p class="mb-5 pl-4 line">Chúng tôi cực kì thích những dịch vụ tại TNV's Wedding, nhân viên ở đây cực kì dễ thương và tận tình với khách hàng, chúng tôi sẽ giới thiệu cho bạn bè để họ có thể biết đến nơi này.</p>
+                                <p class="name">Cặp đôi: Trang & Thiện</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr>
+
+
